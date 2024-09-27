@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikasi Bank Account</title>
+    <style>
+        body {
+            background-color: #f71ff7;
+            font-family: Arial, sans-serif;
+        }
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+           min-height: 100vh;
+        }
+        .login-box {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: relative;
+        }
+        .login-box img {
+            width: 100px;
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .login-box h1 {
+            margin-top: 60px;
+            margin-bottom: 20px;
+        }
+        .login-box input {
+            display: block;
+            width: 96%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .login-box button {
+            padding: 10px;
+            width: 100%;
+            border: none;
+            background-color: #5a0841;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .login-box button:hover {
+            background-color: #e218e2;
+        }
+        .bank-actions {
+            display: none;
+            text-align: center;
+        }
+        .bank-actions button {
+            padding: 10px;
+            margin: 10px;
+            width: 150px;
+            border: none;
+            background-color: #5a0841;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .bank-actions button:hover {
+            background-color: #e73ce7;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+    <div class="login-box" id="login-form">
+        <img src="binar.png" alt="Binar Academy Logo">
+        <h1>Selamat Datang di Aplikasi Bank Account</h1>
+        <input type="text" id="username" placeholder="Username here...">
+        <input type="password" id="password" placeholder="Password here...">
+        <button onclick="login()">LOGIN</button>
+    </div>
+    <div id="bank-actions" class="bank-actions">
+        <img src="binar.png" alt="Binar Academy Logo">
+        <h2>Selamat datang, Anda berhasil login!</h2>
+        <button onclick="tambahSaldo()">Tambah Saldo</button>
+        <button onclick="kurangiSaldo()">Kurangi Saldo</button>
+        <p id="saldo">Saldo Anda: Rp0</p>
+    </div>    
+</div>
+
+
+<script>
+    let saldo = 0;
+
+    function login() {
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+
+        if (username === "user" && password === "pass123") {
+            document.getElementById("login-form").style.display = "none";
+            document.getElementById("bank-actions").style.display = "block";
+        } else {
+            alert("Username atau Password salah");
+        }
+    }
+
+    function tambahSaldo() {
+        let jumlah = parseFloat(prompt("Masukkan jumlah saldo yang ingin ditambahkan:"));
+        if (!isNaN(jumlah) && jumlah > 0) {
+            saldo += jumlah;
+            document.getElementById("saldo").textContent = `Saldo Anda: Rp${saldo}`;
+            alert(`Saldo berhasil ditambahkan. Saldo Anda sekarang: Rp${saldo}`);
+        } else {
+            alert("Masukkan jumlah yang valid.");
+        }
+    }
+
+    function kurangiSaldo() {
+        let jumlah = parseFloat(prompt("Masukkan jumlah saldo yang ingin dikurangi:"));
+        if (!isNaN(jumlah) && jumlah > 0 && jumlah <= saldo) {
+            saldo -= jumlah;
+            document.getElementById("saldo").textContent = `Saldo Anda: Rp${saldo}`;
+            alert(`Saldo berhasil dikurangi. Saldo Anda sekarang: Rp${saldo}`);
+        } else {
+            alert("Masukkan jumlah yang valid atau melebihi saldo.");
+        }
+    }
+</script>
+
+</body>
+</html>
